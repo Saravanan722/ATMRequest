@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AtmRequest"
+             x:Class="AtmRequest.MyRequestPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" Spacing="20" Padding="0,0,16,0">
+            <Image Source="keyboard_backspace_24px" HeightRequest="25" WidthRequest="25"/>
+            <Label Text="My Request" FontSize="18" TextColor="Black" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Image Source="filter_list_24px" HeightRequest="25" WidthRequest="25"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:StatusToStringConverter x:Key="statusToStringConverted"/>
+            <local:StatusToImageConverter x:Key="statusToImageConverter"/>
+            <local:StatusToColorConverter x:Key="statusToColorConverter"/>
+            <local:StatusToBoolConverter x:Key="statusToBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <ListView x:Name="listview" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Padding="16" Margin="16,4" BackgroundColor="White">
+                            <StackLayout >
+                                <Label Text="{Binding RequestTime}" TextColor="#C4C4C4"></Label>
+                                <Label Text="{Binding Address}" TextColor="#000000"></Label>
+                                <StackLayout Orientation="Horizontal" Spacing="20">
+                                    <Image Source="{Binding Status, Converter={StaticResource statusToImageConverter}}"></Image>
+                                    <Label Text="{Binding Status, Converter={StaticResource statusToStringConverted}}" TextColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" HorizontalOptions="FillAndExpand"/>
+                                    <Label Text="Cancel" VerticalOptions="Center" TextColor="#505050" IsVisible="{Binding Status, Converter={StaticResource statusToBoolConverter}}"/>
+                                    <Frame CornerRadius="15" BackgroundColor="#31C7BE" Padding="16,0" HeightRequest="30">
+                                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" >
+                                            <Image Source="map_24px" HeightRequest="16" WidthRequest="16" />
+                                            <Label Text="View" TextColor="White" FontSize="14"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!--<StackLayout Orientation="Vertical" Padding="25">
+            
+            <StackLayout Orientation="Vertical" BackgroundColor="White" HeightRequest="142" WidthRequest="300" Padding ="16">
+                <Label Text="16 October 2021 at 4:47 PM" TextColor="#C4C4C4"></Label>
+                <Label Text="No 74, Anna Salai, Guindy, Chennai - 600032, Opposite Guindy Police Station, Guindy Industrial Estate" TextColor="#000000"></Label>
+                <StackLayout Orientation="Horizontal" Spacing="20" Padding="0,0,22,0" BackgroundColor="#0000001A">
+                    <Image Source="schedule_24px"></Image>
+                    <Label Text="pending" TextColor="#FFA700" HorizontalOptions="FillAndExpand" ></Label>
+                    <Label Text="cancel" TextColor="#505050"></Label>
+                    <Frame CornerRadius="15"
+                           BackgroundColor="#31C7BE"
+                           Padding="16,0"
+                           HeightRequest="30">
+                    <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center"> 
+                        <Image Source="map_24px" HeightRequest="16" WidthRequest="16"></Image> 
+                        <Label Text="View" TextColor="White" FontSize="14"></Label>
+                    </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" BackgroundColor="White" HeightRequest="142" WidthRequest="300" Padding="16">
+                <Label Text="16 October 2021 at 4:47 PM" TextColor="#C4C4C4"></Label>
+                <Label Text="No 74, Anna Salai, Guindy, Chennai - 600032, Opposite Guindy Police Station, Guindy Industrial Estate" TextColor="#000000"></Label>
+                <StackLayout Orientation="Horizontal" Spacing="20" Padding="0,0,22,0" BackgroundColor="#0000001A">
+                    <Image Source="done_24px"></Image>
+                    <Label Text="completed" TextColor="#448D4C" HorizontalOptions="FillAndExpand" ></Label>
+                    <Frame CornerRadius="15"
+                           BackgroundColor="#31C7BE"
+                           Padding="16,0"
+                           HeightRequest="30">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10">
+                        <Image Source="map_24px" HeightRequest="16" WidthRequest="16" ></Image>
+                        <Label Text="View" TextColor="White" FontSize="14"></Label>
+                    </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" BackgroundColor="White"  HeightRequest="142" WidthRequest="300" Padding="16">
+                <Label Text="16 October 2021 at 4:47 PM" TextColor="#C4C4C4"></Label>
+                <Label Text="No 74, Anna Salai, Guindy, Chennai - 600032, Opposite Guindy Police Station, Guindy Industrial Estate" TextColor="#000000"></Label>
+                <StackLayout Orientation="Horizontal" Spacing="20" Padding="0,0,22,0" BackgroundColor="#0000001A">
+                    <Image Source="do_disturb_alt_24px"></Image>
+                    <Label Text="Rejected" TextColor="#B72424" HorizontalOptions="FillAndExpand" ></Label>
+                    <Frame CornerRadius="15"
+                           BackgroundColor="#31C7BE"
+                           Padding="16,0"
+                           HeightRequest="30">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10">
+                            <Image Source="map_24px" HeightRequest="16" WidthRequest="16"/>
+                            <Label Text="View" TextColor="White" FontSize="14"/>
+                        </StackLayout>
+                        </Frame>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" BackgroundColor="White" HeightRequest="142" WidthRequest="300" Padding="16">
+                <Label Text="16 October 2021 at 4:47 PM" TextColor="#C4C4C4"></Label>
+                <Label Text="No 74, Anna Salai, Guindy, Chennai - 600032, Opposite Guindy Police Station, Guindy Industrial Estate" TextColor="#000000"></Label>
+                <StackLayout Orientation="Horizontal" Spacing="20" Padding="0,0,22,0" BackgroundColor="#0000001A">
+                    <Image Source="do_disturb_alt_24px"></Image>
+                    <Label Text="Rejected" TextColor="#B72424" HorizontalOptions="FillAndExpand" ></Label>
+                    <Frame CornerRadius="15"
+                           BackgroundColor="#31C7BE"
+                           Padding="16,0"
+                           HeightRequest="30">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" >
+                            <Image Source="map_24px" HeightRequest="16" WidthRequest="16" />
+                            <Label Text="View" TextColor="White" FontSize="14"/>
+                        </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+        </StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>
